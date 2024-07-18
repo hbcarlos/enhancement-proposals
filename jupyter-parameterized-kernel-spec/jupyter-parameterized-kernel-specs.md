@@ -122,3 +122,6 @@ The algorithm looks like the filter of kernel spec files. firstly, it defines wh
   - if all `metadata.parameters` of a kernel spec file do not include free form (text inputs, textarea) where a user can put any information from frontend side. If so such a kernel spec file is save and we show a dialog window for a user.
 
  If a kernel spec file is not secure then we check whether we setup a flag    `allowed_insecure_kernelspec_params` as true during a running the app. If so, show a dialog window. If not, we still have the bunch of kernel spec files that can be used for customization or not and the task is to run a secure kernel without failing. And if we have the new type of kernel spec file, then we should use its `default values` for each kernel custom parameter. Otherwise the kernel will fail.
+
+ A user can see a dialog which suggests to select kernel parameters if a user clicks on a kernel icon on Launcher or calls a selecting kernel dialog. The `custom_kernel_specs` object inludes user selection and it is proceed on jupyter_client side. If a kernel spec file includes custom kernel variables but a user has not selected anything then `default values` which are in a kernel spec file will be taken. 
+ If `custom_kernel_specs`is not empty than the another part of algorithm takes a certain kernel spec file and replace kernel custom variables

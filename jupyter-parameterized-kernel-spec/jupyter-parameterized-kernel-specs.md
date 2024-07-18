@@ -103,3 +103,22 @@ Cons:
 
  - Changes are required in multiple components of the stack, from the protocol specification to the front-end.
  - Unless we require default values for all parameters, this would be a backward-incompatible change.
+
+## Decisions
+
+- Kernel custom parameters won't be saved into a notebook metadata due to security reason
+- The application can be run with `allowed_insecure_kernelspec_params` parameter which allows a user to see a dialog where they can setup custom kernel parameters
+
+
+## Algorithm
+This section describes current implementation.
+
+All kernel spec files are checked whether they are secure when the application is run. If a kernel spec file includes `metadata.parameters`, it means we have the new type of a kernel spec file dedicated for launching a kernel with custom configuration. The new type of kernel spec file can include any structure of JSON schema inside metadata.parameters.
+
+The algorithm looks like the filter of kernel spec files. firstly, it defines whether a kernel spec file is secure or not. There are next secure criteria are used to define whether a kernel spec is secure:
+
+  - if a kernel spec file does not have `metadata.parameters` then it has default behavior that is present now without functionality of parameterized kernels. Such kernel spec file is secure and allowed. In this case when a user clicks on a kernel icon on Launcher then they run a kernel without seeing a dialog for custom kernel parameters. 
+
+  - if all `metadata.parameters` of a kernel spec file do not include free form (text inputs, textarea) where a user can put any information from frontend side. If so such a kernel spec file is save and we show a dialog window for a user.
+
+ If a kernel spec file is not secure then we check whether we setup a flag    `allowed_insecure_kernelspec_params` as true during a running the app. If so, show a dialog window. If not, we still have the bunch of kernel spec files that can be used for customization or not and the task is to run a secure kernel without failing. And if we have the new type of kernel spec file, then we should use its `default values` for each kernel custom parameter. Otherwise the kernel will fail.

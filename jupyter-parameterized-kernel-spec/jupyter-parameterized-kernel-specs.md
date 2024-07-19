@@ -110,18 +110,16 @@ Cons:
 - The application can be run with `allowed_insecure_kernelspec_params` parameter which allows a user to see a dialog where they can setup custom kernel parameters
 
 
-## Algorithm
-This section describes current implementation.
+## Checking secure kernelspecs
 
-All kernel spec files are checked whether they are secure when the application is run. If a kernel spec file includes `metadata.parameters`, it means we have the new type of a kernel spec file dedicated for launching a kernel with custom configuration. The new type of kernel spec file can include any structure of JSON schema inside metadata.parameters.
+Upon starting, a kernel client checks whether available kernel spec files are secure:
 
-The algorithm looks like the filter of kernel spec files. Firstly, it defines whether a kernel spec file is secure or not. There are next secure criteria for this:
+  - if a kernel spec does not have a `metadata.parameters` field, it is considered as secure. The kernel can be started directly.
 
-  - if a kernel spec file does not have `metadata.parameters` then it has default behavior that is present now without functionality of parameterized kernels. Such kernel spec file is secure and allowed. In this case when a user clicks on a kernel icon on Launcher then they run a kernel without seeing a dialog for custom kernel parameters. 
+  - if all parameters in a kernel spec `metadata.parameters` have constraining types (i.e. the user cannot enter abritrary input), the kernel spec is secure. Starting a kernel will show a form where the user can choose the parameters.
 
-  - if all `metadata.parameters` of a kernel spec file do not include free form (text inputs, textarea) where a user can put any information from frontend side. If so such a kernel spec file is save and we show a dialog window for a user.
+ If a kernel spec file is not secure and the flag `allowed_insecure_kernelspec_params` is passed as `true` during a running the app then a user will be able to fill a form.
 
- If a kernel spec file is not secure then we check whether we setup a flag    `allowed_insecure_kernelspec_params` as true during a running the app. If so, we show a dialog window. If not, we do not show a dialog for a user and we still have the bunch of kernel spec files that can be used for customization or not and the task is to run a secure kernel without failing. And if we have the new type of kernel spec file, then we should use its `default values` for each kernel custom parameter. Otherwise the kernel will fail. If in such case a kernel spec file does not include `default values` for all kerenel custom variables this means that this kernel spec file is not allowed.
+ If a kernel parameter has a non constraining type but provides a default value, this latter will be used and the user won't be able to fill this parameter in the form.
 
- A user can see a dialog which suggests to select kernel parameters when a user clicks on a kernel icon on Launcher or calls a selecting kernel dialog. The `custom_kernel_specs` object inludes user selection and it is proceeded on jupyter_client side. If a kernel spec file includes custom kernel variables but a user has not selected anything then `default values` which are in a kernel spec file will be taken. 
- If `custom_kernel_specs`is not empty then values of this object will replace kernel custom variables which are in a kernel spec file.
+ If a kernel parameter has a non constraining type, and does not provide a default value, then the kernel spec is considered as unsecure. In that case, unless the `allowed_insecure_kernelspec_params` has been passed when starting, the kernelspec is discarded and the user won't be able to start the kernel.

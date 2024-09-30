@@ -30,7 +30,7 @@ These kernel parameters will be not saved into the notebook due to security reas
 
 ## Detailed Explanation
 
-As described in previous sections, we propose to parameterize the kernel specs file. In the example shown below, we can see the kernel specs file from the kernel xeus-cling. We suggest changing the last parameter of the execution command `-std=c++11` to have a variable `-std=${cpp_version}` and adding a new object `parameters` to the metadata of the kernel specs.
+As described in previous sections, we propose to parameterize the kernel specs file. In the example shown below, we can see the kernel specs file from the kernel xeus-cling. We suggest changing the last parameter of the execution command `-std=c++11` to have a variable `-std={cpp_version}` and adding a new object `parameters` to the metadata of the kernel specs.
  
 ```=json
 {

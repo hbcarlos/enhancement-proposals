@@ -5,6 +5,8 @@ This repository contains enhancement proposals for the Jupyter ecosystem, known 
 See [the Enhancement Proposal Guidelines](jupyter-enhancement-proposal-guidelines/jupyter-enhancement-proposal-guidelines.md)
 for more information.
 
+Nicely rendered version of the JEPs: <https://jupyter.org/enhancement-proposals>
+
 ## Index of JEPs
 
 Below is a list of JEPs that have been Submitted in the past.
@@ -36,8 +38,11 @@ encouraged to commence on the topic.
 | 0047 | Implemented | [Jupyter Debugger Protocol](47-jupyter-debugger-protocol/jupyter-debugger-protocol.md) | [#47](https://github.com/jupyter/enhancement-proposals/pull/47) |
 | 0062 | Implemented | [Cell ID Addition to Notebook Format](62-cell-id/cell-id.md) | [#62](https://github.com/jupyter/enhancement-proposals/pull/62) |
 | 0065 | **Accepted** | [Replace PUB socket with XPUB socket](65-jupyter-xpub/jupyter-xpub.md) | [#65](https://github.com/jupyter/enhancement-proposals/pull/65) |
+| 0066 | **Accepted** | Kernel Handshaking pattern[](66-jupyter-handshaking/jupyter-handshaking.md) | [#66](https://github.com/jupyter/enhancement-proposals/pull/66) |
 | 0072 | **Accepted** | [Language server protocol (LSP)](72-language-server-protocol/language-server-protocol.md) | [#72](https://github.com/jupyter/enhancement-proposals/pull/72) |
-| 0079 | **Accepted** | [Build Jupyter Notebook v7 off of JupyterLab components](79-notebook-v7/notebook-v7.md) | [#79](https://github.com/jupyter/enhancement-proposals/pull/79) |
+| 0079 | Implemented | [Build Jupyter Notebook v7 off of JupyterLab components](79-notebook-v7/notebook-v7.md) | [#79](https://github.com/jupyter/enhancement-proposals/pull/79) |
+| 0108 | **Accepted** | [Subdomain and repository for publishing schemas under jupyter.org](108-jupyter-subdomain-for-schemas/jupyter-subdomain-for-schemas.md) | [#108](https://github.com/jupyter/enhancement-proposals/pull/108) |
+| 0122 | **Accepted** | [Incorporate Jupyter Book as a subproject](./122-jupyter-book-incorporation/jupyter-book-incorporation.md) | [#123](https://github.com/jupyter/enhancement-proposals/pull/123) |
 
 ## How do I submit a JEP?
 
